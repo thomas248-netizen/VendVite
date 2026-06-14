@@ -1,0 +1,5 @@
+# Dépendances de l'outil "Annonces Vinted express"
+# Installation :  python -m pip install -r requirements.txt
+streamlit>=1.40
+anthropic>=0.40
+pillow>=10.0
