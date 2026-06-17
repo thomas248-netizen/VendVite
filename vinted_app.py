@@ -14,15 +14,22 @@ from listing_generator import generate_listing
 
 st.set_page_config(page_title="VendVite — Crée ton annonce Vinted", page_icon="⚡", layout="centered")
 
-# On cache le "décor" technique de Streamlit (menus, barres) pour un rendu plus "produit".
+# Habillage : on cache le "décor" Streamlit et on applique le style VendVite
+# (même police que la vitrine, zone photo stylée, boutons soignés).
 st.markdown("""
 <style>
-#MainMenu {visibility:hidden;}
-header[data-testid="stHeader"] {display:none;}
-[data-testid="stToolbar"] {display:none;}
-[data-testid="stDecoration"] {display:none;}
-footer {visibility:hidden;}
-.block-container {padding-top:1.5rem; max-width:780px;}
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+#MainMenu, header[data-testid="stHeader"], [data-testid="stToolbar"], [data-testid="stDecoration"], footer {display:none !important; visibility:hidden;}
+.stApp { font-family:'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#ffffff; }
+.block-container { padding-top:1.2rem; padding-bottom:3rem; max-width:760px; }
+h1, h2, h3 { font-weight:700 !important; letter-spacing:-.01em; color:#1f2328; }
+[data-testid="stFileUploader"] section { border:2px dashed #b9d6cb; border-radius:16px; background:#f6faf8; }
+[data-testid="stFileUploader"] section:hover { border-color:#0F6E56; }
+.stButton > button, .stDownloadButton > button { border-radius:14px; font-weight:700; padding:13px 22px; }
+.stButton > button[kind="primary"] { box-shadow:0 6px 18px rgba(15,110,86,.28); }
+[data-testid="stExpander"] { border:1px solid #e8e6e0; border-radius:14px; }
+.stTextInput input, .stTextArea textarea { border-radius:10px; }
+[data-testid="stAlert"] { border-radius:12px; }
 </style>
 """, unsafe_allow_html=True)
 
