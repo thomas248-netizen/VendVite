@@ -86,12 +86,19 @@ with st.sidebar:
 
     # La clé API : on la lit dans une variable d'environnement si elle existe,
     # sinon le vendeur la colle ici. (On ne la stocke nulle part.)
-    api_key = st.text_input(
-        "Clé API Anthropic",
-        value=default_api_key(),
-        type="password",
-        help="À créer gratuitement sur console.anthropic.com",
-    )
+    # Si une clé est déjà configurée côté serveur (Secrets Streamlit), on l'utilise
+    # SANS jamais l'afficher — sinon un visiteur pourrait la révéler avec l'icône œil.
+    # Sinon (usage local), on demande au visiteur de saisir la sienne.
+    _secret_key = default_api_key()
+    if _secret_key:
+        api_key = _secret_key
+        st.success("✅ Clé API configurée")
+    else:
+        api_key = st.text_input(
+            "Clé API Anthropic",
+            type="password",
+            help="À créer gratuitement sur console.anthropic.com",
+        )
 
     model_label = st.selectbox("Modèle IA", list(MODEL_LABELS.keys()))
     model = MODEL_LABELS[model_label]
